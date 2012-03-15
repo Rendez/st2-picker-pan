@@ -1,0 +1,86 @@
+@import '../global';
+
+$picker-pan-font-size: 1em !default;
+$picker-pan-active-border: .055em solid rgba($contrast-color, .145) !default;
+$picker-pan-row-width: 5.6em !default;
+
+@mixin myapp-picker-pan {
+
+.x-sheet.x-picker .x-toolbar.x-docked-top {
+    border-bottom: none;
+    border-top: none;
+}
+
+.x-scroll-horizontal {
+    .x-picker-bar {
+        @include box-orient(horizontal);
+        @include box-align(stretch);
+        width: $picker-pan-row-width;
+        height: auto;
+        border-top: none;
+        border-bottom: none;
+        border-left: $picker-pan-active-border;
+        border-right: $picker-pan-active-border;
+        border-width: .11em;
+        background: theme_image($theme-name, "picker_bar_gradient2.png");
+        background-size: contain;
+        
+        .x-picker-pointer {
+            @include transform(rotate(90deg));
+            height: .777em;
+            width: .777em;
+        }
+    }
+    
+    .x-picker-slot {
+        .x-dataview-inner {
+            width: auto; // allows .x-scroll-scroller to measure width according to the natural flow
+        }
+        .x-dataview-inner > div {
+            @include display-box;
+            @include box-align(stretch);
+            @include box-orient(horizontal);
+        }
+        
+        .x-dataview-item {
+            font-size: $picker-pan-font-size;
+            width: $picker-pan-row-width;
+            vertical-align: top;
+            line-height: $picker-row-height;
+            height: auto;
+            padding: .5em 0;
+            border-top: none;
+            border-bottom: none;
+            border-left: $picker-pan-active-border;
+            border-right: $picker-pan-active-border;
+
+            background-repeat: no-repeat;
+            background-position: 50% 0;
+            background-image: theme_image($theme-name, "picker_horizontal_indicator2.png");
+            background-size: .11em .611em;
+
+            &:first-child {
+                border-left-color: transparent;
+            }
+
+            &:last-child {
+                border-right-color: transparent;
+            }
+        }
+
+        .x-picker-item {
+            padding-left: 0;
+            padding-top: 1em;
+            padding-bottom: 99em;
+            text-align: center;
+        }
+    }
+    
+    .x-picker-mask {
+        font-size: $picker-pan-font-size;
+        @include box-orient(horizontal);
+        @include box-pack(center);
+    }
+}
+
+}

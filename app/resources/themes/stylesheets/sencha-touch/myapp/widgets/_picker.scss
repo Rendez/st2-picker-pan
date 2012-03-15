@@ -1,0 +1,160 @@
+@import '../global';
+
+$picker-font-size: 1.11em !default;
+$picker-row-height: 2.25em !default;
+$picker-active-border: .11em solid rgba($contrast-color, .145) !default;
+$picker-color: lighten($contrast-color, 6%) !default;
+$picker-bg-color: $secondary-color !default;
+$picker-title-color: darken(desaturate($base-color, 10%), 25%) !default;
+$picker-title-bg-color: lighten(saturate($base-color, 10%), 5%) !default;
+$picker-title-bg-gradient: $base-gradient !default;
+$include-picker-highlights: true !default;
+$picker-bar-gradient: $base-gradient !default;
+
+@mixin myapp-picker {
+
+.x-sheet.x-picker {
+    padding: 0;
+}
+
+.x-sheet.x-picker .x-sheet-inner {
+    position: relative;
+    color: $picker-color;
+    background-color: $picker-bg-color;
+    @include background-clip(padding-box);
+    overflow: hidden;
+    margin: $sheet-padding;
+
+    @if $include-picker-highlights {
+        &:after {
+            z-index: 1;
+            @include insertion(100%, 3.11em, 0, 0);
+            background: $secondary-color theme_image($theme-name, "picker_shadow.png") repeat-x;
+            background-size: auto 100%;
+        }
+    }
+
+    /*.x-picker-slot {
+        .x-body {
+            border-left: 1px solid #999999;
+            border-right: 1px solid #ACACAC;
+        }
+
+        &:first-child {
+            .x-body {
+                border-left: 0;
+            }
+        }
+
+        &:last-child {
+            .x-body {
+                border-right: 0;
+            }
+        }
+    }*/
+}
+
+.x-picker-slot .x-scroll-view {
+    z-index: 2;
+    position: relative;
+}
+
+.x-picker-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    @include display-box;
+    @include box-align(stretch);
+    @include box-orient(vertical);
+    @include box-pack(center);
+    pointer-events: none;
+}
+
+.x-picker-bar {
+    border-top: $picker-active-border;
+    border-bottom: $picker-active-border;
+    height: $picker-row-height + 0.25;
+    /*@include background-gradient(hsla(hue($active-color), 90, 50, .3), $picker-bar-gradient);*/
+    background: theme_image($theme-name, "picker_bar_gradient.png");
+    background-size: cover;
+    @include display-box;
+    @include box-orient(vertical);
+    @include box-pack(center);
+    
+    .x-picker-pointer {
+        width: .694em;
+        height: .777em;
+        background: theme_image($theme-name, "picker_pointer.png") no-repeat;
+        background-size: cover;
+    }
+}
+
+/*.x-picker-slot-title {
+    position:relative;
+    z-index: 2;
+    @include background-gradient($picker-title-bg-color, $picker-title-bg-gradient);
+    border-top: 1px solid $picker-title-bg-color;
+    border-bottom: 1px solid darken($picker-title-bg-color, 20%);
+    -webkit-box-shadow: 0px .1em .3em rgba(0, 0, 0, 0.3);
+    padding: 0.2em 1.02em;
+
+    > div {
+        font-weight: bold;
+        font-size: 0.8em;
+        color: $picker-title-color;
+        @if $include-picker-highlights {
+            @include bevel-text('light');
+        }
+    }
+}*/
+
+.x-picker-slot {
+    .x-dataview-inner {
+      width: 100%;
+    }
+
+    .x-dataview-item {
+        @include box-sizing(border-box);
+        font-size: $picker-font-size;
+        vertical-align: middle;
+        height: $picker-row-height;
+        line-height: $picker-row-height;
+        padding: 0 .5em;
+        border-top: $picker-active-border;
+        border-bottom: $picker-active-border;
+        border-width: 0.06em;
+        
+        background-repeat: no-repeat;
+        background-position: 0 50%;
+        background-image: theme_image($theme-name, "picker_horizontal_indicator.png");
+        background-size: .611em .11em;
+        
+        &:first-child {
+            border-top-color: transparent;
+        }
+        
+        &:last-child {
+            border-bottom-color: transparent;
+        }
+    }
+
+    .x-picker-item {
+        padding-left: 1em;
+        @include ellipsis;
+    }
+}
+
+.x-picker-right {
+    text-align: right;
+}
+.x-picker-center {
+    text-align: center;
+}
+.x-picker-left {
+    text-align: left;
+}
+
+}
